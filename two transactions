@@ -1,0 +1,21 @@
+/*Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete at most two transactions.*/
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int l = prices.size();
+        int minCur = INT_MIN;
+        int buy = INT_MIN;
+        int profit1 = 0;
+        int profit2 = 0;
+        for (int i = 0;i<l;i++){
+            minCur = max(minCur,-prices[i]);
+            profit1 = max(profit1,prices[i] + minCur);
+            buy = max(buy,profit1 - prices[i]);
+            profit2 = max(profit2,buy + prices[i]);
+        }
+        return profit2;
+    }
+};
